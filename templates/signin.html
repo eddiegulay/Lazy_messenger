@@ -1,0 +1,24 @@
+{%extends 'index.html'%}
+{%load static%}
+
+{%block content%}
+<div id="lazy_form" class="full-height bg-light">
+    <div id="form_img_container" class="perfect_center">
+      <img src="{%static 'img/lazy2dtext.png' %}" alt="lazy" id="lazy_login_img" />
+    </div>
+
+    <form action="" method="post" id="login_form">{%csrf_token%}
+      {{form}}
+      <input type="submit" value="sign in" id="submit_button" class="m_5" />
+      <script>
+        $("#id_password2").on("input", function () {
+          if ($("#id_password1").val() != $("#id_password2").val()) {
+            $("#id_password2").css({ color: "red" });
+          } else {
+            $("#id_password2").css({ color: "#79391a" });
+          }
+        });
+      </script>
+    </form>
+  </div>
+{%endblock%}

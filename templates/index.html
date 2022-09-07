@@ -1,0 +1,76 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="cXd llc" />
+    <meta name="description" content="chat app" />
+    <meta name="keywords" content="chat , lazy, lazy chat" />
+    <link rel="stylesheet" type="text/css" href="{%static 'css/UI_design.css'%}" />
+    <link rel="stylesheet" type='text/css' href="{%static 'css/animate.css'%}" />
+    <link rel="stylesheet" type='text/css' href="{%static 'css/bootstrap.min.css'%}" />
+    <link rel="stylesheet" type='text/css' href="{%static 'css/flaticon.css'%}" />
+    <link rel="stylesheet" type='text/css' href="{%static 'css/ionicons.min.css'%}" />
+    <script src="{%static 'js/jquery-3.2.1.min.js'%}"></script>
+    <script src="{%static 'js/bootstrap.min.js'%}"></script>
+    <script src="{%static 'js/easyDom2.0.js'%}"></script>
+    <title>Lazy</title>
+</head>
+
+<body>
+    <div class="full_height full_width flex flex_row">
+        {%block content%}{%endblock%}
+    </div>
+    <div id="lazy_overlay" class="">
+        <span class="online_dot float-right" style="position: absolute; left: 3px;" id="close_overlay">
+            <i class="ion-md-arrow-back"></i>
+        </span>
+        <div id="lazy_content" class="lazy_overlay_content perfect_center"></div>
+    </div>
+    <script>
+
+        $('.video_file').on("contextmenu", function () {
+            var vid = newChild(getById("lazy_content"), "video", "video_overlayed", "media video_overlayed", "autoplay", "true")
+            vid.src = this.src
+            vid.controls = true
+            $("#lazy_overlay").fadeIn()
+            return false
+        })
+
+        $("img").on("contextmenu", function () {
+            var img = newChild(getById("lazy_content"), "img", "video_overlayed", "media image_overlayed")
+            img.src = this.src
+            $("#lazy_overlay").fadeIn()
+            return false;
+        })
+
+        // close overlay by double click
+        $("#lazy_overlay").on("dblclick", function () {
+            $("#lazy_overlay").fadeOut()
+            getById("video_overlayed").src = undefined
+            removeElement(getById("lazy_content"), getById("video_overlayed"))
+        })
+        $("#close_overlay").on("click", function () {
+            $("#lazy_overlay").fadeOut()
+            getById("video_overlayed").src = undefined
+            removeElement(getById("lazy_content"), getById("video_overlayed"))
+        })
+
+        // play video file when clicked
+        $("video").on("click", function () {
+            if (!this.paused) {
+                this.pause()
+            } else {
+                this.play()
+            }
+        })
+
+
+    </script>
+    <script src="{%static 'js/UI_design.js'%}"></script>
+</body>
+
+</html>

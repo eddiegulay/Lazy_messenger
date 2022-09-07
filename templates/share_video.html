@@ -1,0 +1,27 @@
+{%extends 'index.html'%}
+{%load static%}
+
+{%block content%}
+<div id="lazy_form" class="long-tab full-height bg-light flex flex_col">
+    <div id="img_container" class="perfect_center fw">
+        <video src="{%static 'img/lazy2dtext.png' %}" alt="lazy" id="shared_img" style= "width: auto;max-width: 320px;height:auto;max-height: 500px"></video>
+    </div>
+
+    <form action="" method="post" id="media_form" enctype="multipart/form-data" class="mt_10">{%csrf_token%}
+        {{vForm}}
+        <input type="submit" value="send" id="submit_button" class="m_5" />
+    </form>
+
+    <script>
+        var file = null;
+        var url = null;
+        $('#id_video').change(function (e) {
+            file = e.target.files[0]
+            url = URL.createObjectURL(file)
+            getById('shared_img').src = url;
+        })
+
+        
+    </script>
+</div>
+{%endblock%}

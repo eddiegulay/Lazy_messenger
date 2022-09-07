@@ -1,0 +1,69 @@
+<div class="msg_row mt_5 p_10 fw">
+            <div class="msg_container flt_left rcver_msg flex flex_col">
+                <div class="msg_box fw">
+                    <p>Lorem ipsum</p>
+                </div>
+                <div class="msg_info fw">
+                    <span class="timespan">10:55 am</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="msg_row mt_5 p_10 fw">
+            <div class="msg_container  user_msg flex flex_col">
+                <div class="video_box fw">
+                    <video src="cat.mp4" class="video_file"></video>
+                </div>
+                <div class="msg_info fw">
+                    <span class="timespan">10:55 am</span>
+                </div>
+            </div>
+        </div>
+        <div class="msg_row mt_5 p_10 fw">
+            <div class="msg_container  rcver_msg flex flex_col">
+                <div class="image_box fw">
+                    <img src="exDpS7.webp" class="image_file" />
+                </div>
+                <div class="msg_info fw">
+                    <span class="timespan">10:55 am</span>
+                </div>
+            </div>
+        </div> 
+    </div>
+
+    
+</div>
+
+
+
+{%for message in messages%}
+        <div class="msg_row mt_5 p_10 fw">
+            <div class="msg_container flt_right flex flex_col 
+            {%if message.sender.id is myProfile.id%}
+            user_msg flt_right
+            {%else%}
+            rcver_msg float-left
+            {%endif%}
+            ">
+                {%if message.image %}
+                <div class="image_box fw">
+                    <img src="{%static message.content%}" class="image_file" />
+                </div>
+
+                {%elif message.video %}
+                <div class="video_box fw">
+                    <video src="{%static message.content%}" class="video_file"></video>
+                </div>
+
+                {%else%}
+                <div class="msg_box fw">
+                    <p>{{message.content}}</p>
+                </div>
+
+                {%endif%}
+                <div class="msg_info fw">
+                    <span class="timespan">{{message.time_sent}}</span>
+                </div>
+            </div>
+        </div>
+        {%endfor%}

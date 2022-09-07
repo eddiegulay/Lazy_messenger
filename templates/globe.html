@@ -1,0 +1,43 @@
+{%extends 'index.html'%}
+{%load static%}
+{%block content%}
+{%include 'navigations.html'%}
+<div id="lazy_contacts" class="full-height long-tab flex flex_col ">
+    <h4 class="cnt_h4 mt_5">Global</h4>
+
+    {%for Profile in globe%}
+    {%if Profile.user.id is not myProfile.user.id %}
+    <div class="contact_tab flex flex_row mt_5">
+        <div class="contact_thumb" style="
+        background-image: url('{%static Profile.profile_image_url %}');
+        background-size: cover;
+            border-radius: 100%;
+        ">
+            <!-- <img src="{%static Profile.profile_image_url %}" class="contact_image"> -->
+        </div>
+        <div class="contact_information ml_10 flex flex_col">
+            <div class="contact_name">
+                {{Profile.user.username}}
+            </div>
+            <div class="contact_actions perfect_center">
+                <div class="perfect_center">
+                    <!-- <a href="#" class="lazy_contact_icon m_10">
+                        <i class="ion-ios-call"></i>
+                    </a>
+                    <a href="#" class="lazy_contact_icon m_10">
+                        <i class="ion-ios-videocam"></i>
+                    </a> -->
+                    <a href="{%url 'new_chat' Profile.id %}" class="open_chat lazy_contact_icon m_10">
+                        <i class="ion-ios-chatboxes"></i>
+                    </a>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    {%endif%}
+    {%endfor%}
+</div>
+
+{%endblock%}

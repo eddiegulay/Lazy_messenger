@@ -1,0 +1,19 @@
+{%extends 'index.html'%}
+{%load static%}
+
+{%block content%}
+<div id="lazy_form" class="full-height bg-light fw">
+    
+    <div id="form_img_container" class="perfect_center">
+        <img src="{% static 'img/lazy2dtext.png'%}" alt="lazy" id="lazy_login_img" />
+    </div>
+
+    <form action="." method="post" id="login_form">{%csrf_token%}
+        <input type="text" name="username" id="username" placeholder="username" class="m_5 lazy_input" />
+        <input type="password" name="password" id="password" placeholder="password" class="m_5 lazy_input" />
+        <input type="submit" value="log in" id="submit_button" class="m_5" />
+    </form>
+    <a href="{%url 'signup'%}">Create Account</a>
+    {{request.user}}
+</div>
+{%endblock%}

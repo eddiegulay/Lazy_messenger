@@ -1,0 +1,15 @@
+{%extends 'index.html'%}
+{%load static%}
+
+{%block content%}
+<div id="lazy_form" class="full-height bg-light">
+    <div id="form_img_container" class="perfect_center">
+      <img src="{%static 'img/lazy2dtext.png' %}" alt="lazy" id="lazy_login_img" />
+    </div>
+
+    <form action="" method="post" id="login_form" enctype="multipart/form-data">{%csrf_token%}
+      {{form}}
+      <input type="submit" value="Create profile" id="submit_button" class="m_5" />
+    </form>
+  </div>
+{%endblock%}

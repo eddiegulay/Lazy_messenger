@@ -1,0 +1,511 @@
+/*!
+  Lazy UI design, v1.0.0-21.
+  Created by Edgar Gulay for the Lazy Messenger.
+  License: Not licensed.
+
+  Web front end UI css file.
+  Modified to fit current usage.
+  created on: 04 September 2021, 5:27 am.
+*/
+
+/* pre sets */
+
+.flex {
+  display: flex;
+}
+.flex_col {
+  flex-direction: column;
+}
+.flex_row {
+  flex-direction: row;
+}
+.justify_center {
+  justify-content: center;
+}
+.aling_center {
+  align-items: center;
+}
+.perfect_center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.m_5 {
+  margin: 5px;
+}
+.m_10 {
+  margin: 10px;
+}
+.ml_10 {
+  margin-left: 10px;
+}
+.mb_10 {
+  margin-bottom: 10px;
+}
+.mt_5 {
+  margin-top: 5px;
+}
+.mt_10 {
+  margin-top: 10px;
+}
+.fw {
+  width: 100%;
+}
+
+.flt_left {
+  float: left;
+}
+.flt_right {
+  float: right;
+}
+.pb_10 {
+  padding-bottom: 10px;
+}
+.p_10 {
+  padding: 10px;
+}
+.show {
+  display: block;
+}
+.hide {
+  display: none;
+}
+* {
+  scroll-behavior: smooth;
+}
+body, .full_height {
+  background-color: #d5e0e9;
+  overflow: hidden;
+}
+i {
+  cursor: pointer;
+}
+a{
+  text-decoration: none;
+}
+a:hover{
+  color: initial;
+  text-decoration: none;
+}
+/* login form */
+#lazy_form {
+  width: 320px;
+  padding: 10px;
+}
+#form_img_container {
+  width: 100%;
+  height: 90px;
+  float: left;
+}
+#login_form {
+  width: 100%;
+  padding: 10px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+#login_img {
+  height: auto;
+  width: auto;
+}
+.lazy_input {
+  outline: none;
+  border: none;
+  border: 1px solid #ddb39d;
+  border-radius: 5px;
+  color: #79391a;
+  padding-left: 5px;
+  height: 30px;
+}
+.errorlist{display: none;}
+#submit_button {
+  border: none;
+  width: 70px;
+  padding: 5px;
+  border-radius: 5px;
+  color: #0e4d47;
+  background-color: #d5e0e9;
+}
+#options{
+  position: fixed;
+  bottom: 0px;
+  width: 500px;
+  background-color: #f2f8f8;
+  padding: 10px;
+}
+
+.attach_ico{
+  margin: 10px;
+  background-color: #0e4d47;
+  text-decoration: none;
+  color: #f2f8f8;
+  line-height: 50px;
+  width: 50px;
+  text-align: center;
+  border-radius: 50px;
+}
+.file_select_input{
+  width: 200px;
+  outline: none;
+}
+/* navigation */
+
+@media screen and (max-width: 425px) {
+  .full-height {
+    height: 100%;
+  }
+  #lazy_navigation {
+    width: 45px;
+  }
+  .lazy_tab {
+    width: 100%;
+    height: 45px;
+  }
+  .long-tab{
+    width: calc(100% - 45px)
+  }
+}
+@media screen and (min-width: 425px) {
+  .long-tab{
+    margin-top: 10px;
+    margin-left: 10px;
+    border-radius: 10px;
+    overflow: auto;
+  }
+  .full-height {
+    height: calc(100% - 20px);
+  }
+  #lazy_navigation {
+    min-width: 55px;
+    width: 55px;
+  }
+  .lazy_tab {
+    width: 100%;
+    height: 55px;
+  }
+  #lazy_playground, #options{
+    width: 500px; 
+  }
+}
+#lazy_navigation {
+  background-color: #0e4d47;
+  flex-direction: column;
+}
+
+.lazy_tab {
+  transition: 0.3s ease-in;
+}
+.lazy_tab i {
+  color: #fff;
+  font-size: 20px;
+}
+.lazy_tab:hover {
+  background-color: #d5e0e9;
+}
+.lazy_tab:hover i {
+  color: #0e4d47;
+}
+#logout {
+  margin-top: 30px;
+}
+
+
+/*chats */
+#lazy_chat {
+  width: 320px;
+  flex-direction: column;
+  background-color: #f2f8f8;
+}
+.lazy_short_profile {
+  width: 320px;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #f2f8f8;
+}
+.profile_image_container,
+.profile_info_container {
+  width: 100%;
+}
+.profile_image {
+  width: 80px;
+  height: 80px;
+  border-radius: 80px;
+}
+.profile_actual_name {
+  font-size: 24px;
+}
+.profile_username {
+  font-size: 17px;
+}
+
+.chat_listing {
+  border-radius: 10px;
+  transition: 0.4s ease-in;
+}
+.chat_listing:hover {
+  background-color: #d5e0e9;
+  padding-left: 10px;
+}
+.profile_thum {
+  height: 55px;
+  width: 55px;
+}
+.img_thumb {
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
+}
+.chat_content {
+  padding-left: 5px;
+}
+
+
+/* messaging playground */
+
+#lazy_playground {
+  background-color: #f2f8f8;
+}
+.messager_user_name {
+  height: 50px;
+  padding-left: 10px;
+  padding-top: 5px;
+}
+.online_dot,
+.lazy_contact_icon {
+  color: #0e4d47;
+  margin: 10px;
+  line-height: 35px;
+  width: 35px;
+  border-radius: 35px;
+  background-color: #d5e0e9;
+  text-align: center;
+}
+#lazy_chat_room {
+  height: calc(100% - 100px);
+  overflow: auto;
+  float: left;
+  padding-bottom: 200px;
+}
+#lazy_message_input {
+  height: 50px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+/* reciever profile */
+#lazy_reciever {
+  width: 320px;
+  border-radius: 10px;
+}
+.lazy_contact_icon {
+  text-decoration: none;
+}
+.profile_username,
+.last_msg {
+  color: #8694a0;
+}
+.reciever_actual_name {
+  color: #0e4d47;
+  font-size: 24px;
+}
+
+/* notifications */
+#lazy_notification_panel {
+  overflow: hidden;
+  background-color: #f2f8f8;
+  width: 320px;
+}
+.lazy_h4,
+.h4_ntf,
+.cnt_h4 {
+  color: #0e4d47;
+  padding-left: 10px;
+}
+.notification_tab {
+  background-color: #d5e0e9;
+  padding: 10px;
+  border-radius: 10px;
+}
+.notification_content {
+  color: #0e4d47;
+  font-size: 19px;
+}
+.lazy_notification-icon {
+  color: #0e4d47;
+  font-size: 20px;
+  display: none;
+  margin-right: 50px;
+}
+.notification_tab:hover .lazy_notification-icon {
+  display: block;
+}
+
+/* chat boxes */
+.msg_container {
+  max-width: 300px;
+  min-width: 200px;
+  width: 60%;
+}
+.msg_row{
+  float: left;
+}
+.msg_box {
+  border-top-right-radius: 20px;
+  border-top-left-radius: 20px;
+  padding-top: 15px;
+  padding-left: 15px;
+}
+.delBut{
+  display: none;
+}
+.msg_container:hover .delBut{
+  display: block;
+}
+.image_file {
+  max-width: 300px;
+  width: 100%;
+  height: auto;
+}
+.video_box,
+.video_file,
+.image_file {
+  border-top-right-radius: 20px;
+  border-top-left-radius: 20px;
+  min-height: 100px;
+}
+.user_msg .msg_box,
+.user_msg .video_file,
+.user_msg .image_file {
+  background-color: #d5e0e9;
+  border-bottom-left-radius: 20px;
+}
+.rcver_msg .msg_box,
+.rcver_msg .video_file,
+.rcver_msg .image_file {
+  border: 2px solid #d5e0e9;
+  border-bottom-right-radius: 20px;
+}
+.timespan {
+  color: #8cb1ad;
+  font-size: 13px;
+}
+.video_file {
+  width: 100%;
+  height: auto;
+}
+/* message input form area */
+.lazy_tab_icon_container {
+  width: 40px;
+  height: 40px;
+  text-align: center;
+}
+.lazy_tab_icon_container i {
+  width: 40px;
+  line-height: 40px;
+  border-radius: 40px;
+  background-color: #d5e0e9;
+  font-size: 20px;
+}
+#message_form {
+  width: calc(100% - 5px);
+}
+#message_input_box {
+  width: calc(100% - 10px);
+  height: 40px;
+  border: none;
+  outline: none;
+  -webkit-ouline: none;
+  background-color: #f2f8f8;
+  border-left: 1px solid #0e4d47;
+  padding-left: 10px;
+}
+#send_btn {
+  border: none;
+  width: auto;
+  height: 37px;
+  background-color: #d5e0e9;
+  border-radius: 5px;
+  color: #0e4d47;
+  outline: none;
+}
+#send_btn:hover {
+  background-color: #b3c5d4;
+}
+
+/* contacts */
+
+#lazy_contacts {
+  width: 320px;
+  padding: 10px;
+  background-color: #f2f8f8;
+}
+.contact_tab {
+  border-radius: 10px;
+  padding: 10px;
+  background-color: #dce7f0;
+}
+.contact_thumb {
+  width: 60px;
+  height: 60px;
+  overflow: hidden;
+  border-radius: 50px;
+}
+.contact_image {
+  width: auto;
+  height: auto;
+}
+.contact_name {
+  font-size: 19px;
+  padding-left: 10px;
+  padding-top: 8px;
+  transition: 0.5s ease-in 0.5s;
+}
+.contact_actions {
+  display: none;
+}
+.contact_tab:hover .contact_actions {
+  display: block;
+}
+.contact_tab:hover .contact_name {
+  padding-top: 0px;
+}
+
+/* screen overlay */
+#lazy_overlay {
+  background-color: #0e4d479f;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  display: none;
+}
+.lazy_overlay_content {
+  width: 100%;
+  height: 100%;
+  background-color: #d5e0e9;
+  overflow: hidden;
+  transition: 1s ease-in;
+}
+.media {
+  max-width: 700px;
+  width: 100%;
+  height:auto;
+}
+/* animation 
+#lazy_chat{
+  animation: fadeInDown .5s ease-in;
+  background-color: #d5e0e9;
+}
+#lazy_chats_view{
+  animation: fadeInDown .5s ease-in;
+}
+.lazy_short_profile{
+  animation: fadeInDown .5s ease-in;
+}
+*/
+.contact_actions {
+  animation: fadeInUp 0.5s ease-in;
+}
+/* Responsive design */

@@ -1,0 +1,41 @@
+{%extends 'index.html'%}
+{%load static%}
+{%block content%}
+{%include 'navigations.html'%}
+<div id="lazy_chat" class="long-tab full-height flex">
+    <h4 class="lazy_h4 mt_5">chats</h4>
+
+    {%for chat in chatlist%}
+    <a href="{%url 'playground' chat.id %}" id="" class="chat_listing open_chat m_5 pb_10">
+        <div class="lazy_chat_tab flex flex_row mt_5 ">
+            <div class="profile_thum perfect_center"
+            style = "
+            background-image: url('{%if chat.first_user.user.id is myProfile.user.id %} {%static chat.last_user.profile_image_url %} {%else%} {%static chat.first_user.profile_image_url %} {%endif%}');
+            background-size: cover;
+            border-radius: 100%;
+            ">
+               
+            </div>
+            <div class="chat_content flex flex_col">
+                <span class="msg_reciver">
+                    {%if chat.first_user.user.id is myProfile.user.id%}
+                     {{chat.last_user.user}}
+                    {%else%}
+                     {{chat.first_user.user}}
+                    {%endif%}
+                </span>
+                <span class="last_msg"> 
+                    {%if chat.first_user.user.id is myProfile.user.id%}
+                     {{chat.last_user.user.last_login}}
+                    {%else%}
+                     {{chat.first_user.user.last_login}}
+                    {%endif%}
+                </span>
+            </div>
+        </div>
+    </a>
+    {%endfor%}
+
+</div>
+
+{%endblock%}

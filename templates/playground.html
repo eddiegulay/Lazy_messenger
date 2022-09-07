@@ -1,0 +1,193 @@
+{%extends 'index.html'%}
+{%load static%}
+{%block content%}
+<script>
+    var my_id = {{ myProfile.id }}
+</script>
+{%include 'navigations.html'%}
+
+<div id="lazy_playground" class="long-tab full-height flex flex_col">
+    <div class="messager_user_name fw">
+        <span class="profile_actual_name">
+            {%if active_chat.first_user.user.id is myProfile.user.id%}
+            {{active_chat.last_user.user}}
+            {%else%}
+            {{active_chat.first_user.user}}
+            {%endif%}
+        </span>
+        <span class="online_dot float-right">
+            <i class="ion-ios-moon"></i>
+        </span>
+    </div>
+
+    <div id="lazy_chat_room" class="fw">
+        <!-- text messages -->
+
+    </div>
+    <div id="lazy_message_input" class="fw flex flex_row">
+        <div class="lazy_tab_icon_container perfect_center m_5" id="attach">
+            <i class="ion-ios-bowtie"></i>
+        </div>
+        <form method='POST' action="{%url 'send' active_chat.id %}" id="message_form" class="flex flex_col m_5">
+            {%csrf_token%}
+            <div class="flex_row flex">
+                <input type="text" name="message" id="message_input_box" placeholder="Type here" />
+                <input type='submit' class="ml_10" id="send_btn" value='send'>
+            </div>
+
+        </form>
+    </div>
+
+    <div id="options">
+
+        <div class="fw flex flex_col">
+            <div class="fw full-height perfect_center">
+                <span id="back" class="attach_ico">
+                    <i class="ion-md-arrow-back"></i>
+                </span>
+                <a href="{%url 'send_image' active_chat.id %}" id="image" class="attach_ico">
+                    <i class="ion-ios-image"></i>
+                </a>
+                <a href="{%url 'send_video' active_chat.id %}" id="video" class="attach_ico">
+                    <i class="ion-ios-videocam"></i>
+                </a>
+
+            </div>
+        </div>
+
+
+
+    </div>
+
+</div>
+
+
+<!-- jquery.ajax backend requests -->
+<script>
+
+    // more re-arrange
+
+    //scroll to last message with chime sound
+    var activetime = 0 //seconds active
+    var ringtone = new Audio
+    ringtone.src = "{%static 'ringtones/chimes.wav' %}"
+    ringtone.volume = 1
+    function ding() {
+        ringtone.play()
+    }
+
+    function scroll_last() {
+        var plate = getById('lazy_chat_room')
+        var last = plate.lastElementChild
+        var height = last.offsetTop
+        plate.scrollTo(0, height + innerHeight)
+    }
+
+    //for message updating
+    var initial = { id: 0 };
+    var final = { id: 0 };
+
+    //print messages when script loads
+    collect_messages()
+    //fetch new message after every second
+    setInterval(function () {
+        update_messages()
+    }, 1000)
+    
+
+    function collect_messages() {
+        $.ajax({
+            type: 'GET',
+            url: '{%url "get_messages" active_chat.id%}',
+            success: function (response) {
+
+                $("#lazy_chat_room").empty()
+                for (key in response) {
+                    var msgList = response[key]
+                    for (var i = 0; i < msgList.length; i++) {
+                        create_message(msgList[i])
+                        initial = msgList[msgList.length - 1]
+                    }
+                }
+                scroll_last()
+            },
+            error: function () {
+                console.log('Error')
+            }
+        })
+    }
+    function update_messages() {
+        $.ajax({
+            type: 'GET',
+            url: '{%url "get_messages" active_chat.id%}',
+            success: function (response) {
+                var msgList = null
+                for (key in response) {
+                    var msgList = response[key]
+                    final = msgList[msgList.length - 1]
+                }
+                final = msgList[msgList.length - 1]
+                if (final.id != initial.id) {
+                    DOMCREATEMESSAGE(final)
+                } else {
+                    activetime++
+                }
+            },
+            error: function () {
+                console.log('Error')
+            }
+        })
+    }
+    function DOMCREATEMESSAGE(msg) {
+        if (!getById('row_' + msg.id) ) {
+            create_message(msg)
+            scroll_last()
+            initial = final
+            if (msg.sender_id != my_id) {
+                ding()
+            }
+        }
+
+    }
+
+    //sending text message
+    $(document).on('submit', '#message_form', function (e) {
+        e.preventDefault()
+        if (getById("message_input_box").value != '') {
+            $.ajax({
+                type: 'POST',
+                url: "{%url 'send' active_chat.id %}",
+                data: {
+                    content: $('#message_input_box').val(),
+                    csrfmiddlewaretoken: $('input[name = csrfmiddlewaretoken]').val(),
+                },
+                success: function (data) {
+                    getById("message_input_box").value = ''
+                }
+            })
+        }
+
+    })
+
+    //deleting message
+    function deleteMessage() {
+        resp = confirm("delete?")
+        if (resp) {
+            alert('message delete function fall here --> ' + this.id)
+        }
+
+        return false
+    }
+
+    $(".file_input").hide()
+    $("#options").hide()
+    $("#attach").click(function () {
+        $(".file_input").hide()
+        $("#options").fadeIn()
+    })
+    $("#back").click(function () {
+        $("#options").fadeOut()
+    })
+
+</script>
+{%endblock%}
