@@ -31,7 +31,7 @@ DEVELOPMENT_MODE = os.getenv("DEVELOPMENT_MODE", "False") == "True"
 DEBUG =True
 
 ALLOWED_HOSTS = [
-    "192.168.192.101"
+    "*"
 ]
 
 
